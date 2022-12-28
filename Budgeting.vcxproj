@@ -105,12 +105,14 @@
   <ItemGroup>
     <ClCompile Include="goals.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="rootInfo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="info.json" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="goals.h" />
+    <ClInclude Include="rootInfo.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -1,5 +1,6 @@
 {
-	"balance"  :  "2000",
+	"balance": 2000,
+	"username":  "Alex",
 	"goals": [
 		{
 			"name": "test",

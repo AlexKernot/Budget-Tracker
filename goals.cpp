@@ -12,7 +12,7 @@ Goals::Goals(std::string a_name, int a_priority, double a_goal, double a_progres
 }
 
 double Goals::getPecentage() {
-	return progress / goal;
+	return progress / goal * 100;
 }
 
 std::string Goals::getName() {

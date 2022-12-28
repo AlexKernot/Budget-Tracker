@@ -21,6 +21,9 @@
     <ClCompile Include="goals.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="rootInfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="info.json">
@@ -29,6 +32,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="goals.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rootInfo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
