@@ -1,0 +1,21 @@
+{
+	"balance"  :  "2000",
+	"goals": [
+		{
+			"name": "test",
+			"priority": 1,
+			"progress": 200,
+			"goal": 2000,
+			"allocation": 20,
+			"allowOverflow": true
+		},
+		{
+			"name": "test2",
+			"priority": 2,
+			"progress": 2002,
+			"goal": 2020,
+			"allocation": 50,
+			"allowOverflow": false
+		}
+	]
+}
