@@ -10,23 +10,30 @@ const std::string fileName = "info.json";
 
 //	Number of items to look for inside the file
 const int numberOfSettings = 10;
+const int maxNumberOfGoals = 100;
 
-rootInfo getInfo(Goals goals[100]);
+Json::Value getInfo(Goals goals[maxNumberOfGoals]);
 
-bool generateSummary(Goals goalsPointer[100], rootInfo userInfo);
+bool generateSummary(Goals goalsPointer[maxNumberOfGoals], rootInfo userInfo);
 
 std::string roundString(std::string inputString, int decimalPlaces = 2);
+
+rootInfo getUserInfo(Json::Value *userData);
 
 int main() {
 	std::string command;
 
 	//	Getting data from previous sessions
-	Goals info[100];
+	Json::Value dataFromFile;
+
+	Goals info[maxNumberOfGoals];
 	Goals* goalsPointer = &info[0];
 
 	rootInfo userInfo;
 
-	userInfo = getInfo(goalsPointer);
+	dataFromFile = getInfo(goalsPointer);
+
+	userInfo = getUserInfo(&dataFromFile);
 
 	if (info[0].getIsError()) {
 		std::cout << "\nAn error occured while accessing the info file. Error code " + info[0].getErrorCode() + '\n';
@@ -45,7 +52,7 @@ int main() {
 	return 0;
 }
 
-rootInfo getInfo(Goals goals[100]) {
+Json::Value getInfo(Goals goals[maxNumberOfGoals]) {
 	std::ifstream file;
 	std::string word;
 	file.open(fileName, std::ifstream::binary);
@@ -57,11 +64,6 @@ rootInfo getInfo(Goals goals[100]) {
 
 	Json::Value root;
 	file >> root;
-
-	double balance = root.get("balance", 0).asDouble();
-	std::string userName = root.get("username", "User").asString();
-
-	rootInfo userInfo = rootInfo(userName, balance);
 
 	Json::Value goalsList;
 	goalsList = root["goals"];
@@ -83,10 +85,19 @@ rootInfo getInfo(Goals goals[100]) {
 
 		goals[i] = Goals(name, priority, goal, progress, allocation, allowOverflow);
 	}
+	return root;
+}
+
+rootInfo getUserInfo(Json::Value *userData) {
+
+	double balance = userData->get("balance", 0).asDouble();
+	std::string userName = userData->get("username", "User").asString();
+
+	rootInfo userInfo = rootInfo(userName, balance);
 	return userInfo;
 }
 
-bool generateSummary(Goals goalsPointer[100], rootInfo userInfo) {
+bool generateSummary(Goals goalsPointer[maxNumberOfGoals], rootInfo userInfo) {
 
 	std::string balance = roundString(std::to_string(userInfo.getTotalBalance()));
 
@@ -118,22 +129,21 @@ std::string roundString(std::string inputString, int decimalPlaces) {
 
 	std::string newString;
 
+	// Access each char individually until decimal place
 	int i = 0;
 	for (i = 0; !(inputString.at(i) == '.'); ++i) {
 		newString += inputString.at(i);
 	}
+
+	// Add period outside loop
 	newString += inputString.at(i);
 	++i;
 
 	int repeats = i + decimalPlaces;
 
+	// Add number of decimal places to newString
 	for (i = i; i < repeats; ++i) {
 		newString += inputString.at(i);
 	}
 	return newString;
-	// Access each char individually until decimal place
-
-	// Add period and number of decimal places outside loop
-
-	// Return new string.
 }

@@ -9,8 +9,8 @@ class Goals {
 	double progress;
 	double allocation;
 	bool allowOverflow;
-	bool isError;
-	int errorCode;
+	bool isError = false;
+	int errorCode = 0;
 
 public:
 
