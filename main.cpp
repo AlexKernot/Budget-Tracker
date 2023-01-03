@@ -24,8 +24,6 @@ Json::Value addGoal(Goals newGoal, Json::Value root);
 
 Json::Value goalToJson(Goals goal);
 
-Json::Value testGoal(const Goals newGoal, Json::Value root);
-
 int main() {
 	std::string command;
 
@@ -122,17 +120,6 @@ Json::Value goalToJson(Goals goal) {
 	json["allowOverflow"] = false;
 
 	return json;
-}
-
-Json::Value testGoal(const Goals newGoal, Json::Value root) {
-	Json::Value json2 = goalToJson(Goals("Test2"));
-	Json::Value json = goalToJson(newGoal);
-
-	json2.append(json);
-
-	std::cout << json2[0].get("name", "null") << "\n";
-
-	return json2;
 }
 
 rootInfo getUserInfo(Json::Value *userData) {
