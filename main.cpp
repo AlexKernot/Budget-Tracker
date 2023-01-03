@@ -20,6 +20,12 @@ std::string roundString(std::string inputString, int decimalPlaces = 2);
 
 rootInfo getUserInfo(Json::Value *userData);
 
+Json::Value addGoal(Goals newGoal, Json::Value root);
+
+Json::Value goalToJson(Goals goal);
+
+Json::Value testGoal(const Goals newGoal, Json::Value root);
+
 int main() {
 	std::string command;
 
@@ -86,6 +92,47 @@ Json::Value getInfo(Goals goals[maxNumberOfGoals]) {
 		goals[i] = Goals(name, priority, goal, progress, allocation, allowOverflow);
 	}
 	return root;
+}
+
+Json::Value addGoal(const Goals newGoal, Json::Value root) {
+	Json::Value json = goalToJson(newGoal);
+	root["goals"].append(json);
+
+	std::ofstream file;
+	file.open(fileName, std::ofstream::binary);
+
+	// If the file isn't open for any reason, throw an error
+	if (!file.is_open()) {
+		std::cout << "Error opening file";
+	}
+
+	file << root;
+
+	return root;
+}
+
+Json::Value goalToJson(Goals goal) {
+	Json::Value json;
+
+	json["name"] = goal.getName();
+	json["priority"] = 1;
+	json["progress"] = goal.getProgress();
+	json["goal"] = goal.getGoal();
+	json["allocation"] = goal.getAllocation();
+	json["allowOverflow"] = false;
+
+	return json;
+}
+
+Json::Value testGoal(const Goals newGoal, Json::Value root) {
+	Json::Value json2 = goalToJson(Goals("Test2"));
+	Json::Value json = goalToJson(newGoal);
+
+	json2.append(json);
+
+	std::cout << json2[0].get("name", "null") << "\n";
+
+	return json2;
 }
 
 rootInfo getUserInfo(Json::Value *userData) {

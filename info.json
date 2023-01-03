@@ -1,22 +1,31 @@
 {
-	"balance": 2000,
-	"username":  "Alex",
-	"goals": [
+	"balance" : 2000,
+	"goals" : 
+	[
 		{
-			"name": "test",
-			"priority": 1,
-			"progress": 200,
-			"goal": 2000,
-			"allocation": 20,
-			"allowOverflow": true
+			"allocation" : 20,
+			"allowOverflow" : true,
+			"goal" : 2000,
+			"name" : "test3",
+			"priority" : 1,
+			"progress" : 200
 		},
 		{
-			"name": "test2",
-			"priority": 2,
-			"progress": 2002,
-			"goal": 2020,
-			"allocation": 50,
-			"allowOverflow": false
+			"allocation" : 50,
+			"allowOverflow" : false,
+			"goal" : 2020,
+			"name" : "test2",
+			"priority" : 2,
+			"progress" : 2002
+		},
+		{
+			"allocation" : 0.0,
+			"allowOverflow" : false,
+			"goal" : 0.0,
+			"name" : "Test42",
+			"priority" : 1,
+			"progress" : 0.0
 		}
-	]
+	],
+	"username" : "Alex"
 }
